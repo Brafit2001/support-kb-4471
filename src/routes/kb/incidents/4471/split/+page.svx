@@ -1,0 +1,61 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Marcelino Fernandez Cabello
+status: open
+reviewed: 2026-11-07
+signature: v1.eyJzdWIiOiIxOTA4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQwNDcxMDMsImV4cCI6MTc5NDEzMzUwM30.VsGEtZDjkiKOAAJKrgIjo5PrkAWP8N6ZZ7iiWsaf6jQ
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/Brafit2001/support-kb-4471/issues';
+</script>
+
+[#4471](/kb/incidents/4471) was merged by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject))
+and marked known: one issue, one fix queued. Its own cause table already disagrees: one of its two causes
+is marked "not this ticket — no ticket of its own", and a footnote holds reports that are not a month/day
+swap at all. Read by what broke, #4471 holds three problems. Each one now has its own ticket.
+
+<Callout kind="warn">
+Fixing the parser closes only the first row. The other two need their own fixes.
+</Callout>
+
+## The split
+
+<ProblemTable ticket={4471} tickets={{ parser: `${repo}/1`, hint: `${repo}/2`, shift: `${repo}/3` }} />
+
+- **`parser`**: the shared parser reads dates month first; every tenant on file writes the day first.
+  "7 April" comes out as "4 July". This is the bug #4471 describes.
+- **`hint`**: `booking-v3` prints `MM/DD/YYYY` under its date field. People at day-first tenants type
+  what the hint says and the form reads it day first. Same symptom, different code: the parser fix
+  does not touch it.
+- **`shift`**: the booking lands one day off, or on a different day for people in different time zones.
+  The month never moves. The desk already read these as one-day moves (`desk-notes.json`), but the
+  table filed them under `parser` by tenant. This looks like a time-zone conversion bug.
+
+## How the reports were placed
+
+- **Count each report once.** The ticket export comes in overlapping pages, so some reports appear twice.
+  Every count here is by unique report id.
+- **Place by tenant, not by intake tag.** The intake tag is guessed from the reporter's browser. The cause
+  depends on the tenant's locale and booking form (`causes.ts`, `locales.ts`).
+- **Read before merging.** A matching subject says two people chose the same words, not that they hit the
+  same bug. Reports with the same subject sit in all three rows.
+
+## What #4471 shows today
+
+For comparison, the table on the incident page, built from the same data:
+
+<CauseTable ticket={4471} />
+
+## Lessons
+
+- A count is only as good as the rule that merged it. Merge by cause, not by subject.
+- When a table says "no ticket of its own", open one.
+
+<RenderStamp {signature} />
