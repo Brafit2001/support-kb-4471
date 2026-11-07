@@ -9,11 +9,11 @@
 		<link href="../../../_app/immutable/chunks/CptVIHXj.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CHfFqfNT.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DQG8lHS1.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.-9EZr80W.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.DXa3twMq.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.Izv2btRW.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DK3Fl9T5.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/5.L3a18rmB.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CwlsF1bw.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/5.DIzzhMR7.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BqC1S2ky.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DkoUumqI.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/gCVyuZ4b.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DcZ9TEUN.js" rel="modulepreload">
@@ -24,7 +24,7 @@
 		<link href="../../../_app/immutable/assets/_page.lbj36FF-.css" rel="stylesheet">
   </head>
   <body>
-    <div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><!--[--><!--[-1--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 · three problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Marcelino Fernandez Cabello</b></span> <span class="status open svelte-e2jw2j">open</span> <span class="svelte-e2jw2j">reviewed 2026-11-07 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> was merged by subject line (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>)
+    <div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><!--[--><!--[-1--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 · three problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Marcelino Fernandez Cabello</b></span> <span class="status closed svelte-e2jw2j">closed</span> <span class="svelte-e2jw2j">reviewed 2026-11-07 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> was merged by subject line (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>)
 and marked known: one issue, one fix queued. Its own cause table already disagrees: one of its two causes
 is marked “not this ticket — no ticket of its own”, and a footnote holds reports that are not a month/day
 swap at all. Read by what broke, #4471 holds three problems. Each one now has its own ticket.</p> <aside class="warn svelte-17bri61"><!---->Fixing the parser closes only the first row. The other two need their own fixes.<!----></aside><!----> <h2>The split</h2> <p class="sum svelte-1op6c6"><strong>412</strong> unique reports merged into #4471 · <strong>3</strong> problems</p> <table><thead><tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead><tbody><!--[--><tr class="svelte-1op6c6"><td class="svelte-1op6c6"><code>parser</code></td><td class="svelte-1op6c6">374</td><td class="svelte-1op6c6">11</td><td class="svelte-1op6c6">2026-04-01 → 2026-10-04</td><td class="svelte-1op6c6"><!--[0--><a href="https://github.com/Brafit2001/support-kb-4471/issues/1">#1</a><!--]--></td></tr><tr class="svelte-1op6c6"><td class="svelte-1op6c6"><code>hint</code></td><td class="svelte-1op6c6">33</td><td class="svelte-1op6c6">3</td><td class="svelte-1op6c6">2026-04-17 → 2026-09-22</td><td class="svelte-1op6c6"><!--[0--><a href="https://github.com/Brafit2001/support-kb-4471/issues/2">#2</a><!--]--></td></tr><tr class="svelte-1op6c6"><td class="svelte-1op6c6"><code>shift</code></td><td class="svelte-1op6c6">5</td><td class="svelte-1op6c6">5</td><td class="svelte-1op6c6">2026-04-02 → 2026-10-04</td><td class="svelte-1op6c6"><!--[0--><a href="https://github.com/Brafit2001/support-kb-4471/issues/3">#3</a><!--]--></td></tr><!--]--></tbody></table><!----> <ul><li><strong><code>parser</code></strong>: the shared parser reads dates month first; every tenant on file writes the day first.
@@ -32,23 +32,23 @@ swap at all. Read by what broke, #4471 holds three problems. Each one now has it
 what the hint says and the form reads it day first. Same symptom, different code: the parser fix
 does not touch it.</li> <li><strong><code>shift</code></strong>: the booking lands one day off, or on a different day for people in different time zones.
 The month never moves. The desk already read these as one-day moves (<code>desk-notes.json</code>), but the
-table filed them under <code>parser</code> by tenant. This looks like a time-zone conversion bug.</li></ul> <h2>How the reports were placed</h2> <ul><li><strong>Count each report once.</strong> The ticket export comes in overlapping pages, so some reports appear twice.
+table filed them under <code>parser</code> by tenant. This looks like a time-zone conversion bug.</li></ul> <h2>Outcome</h2> <p>Engineering closed #4471 on 5 October:</p> <ul><li><strong><code>parser</code></strong>: fixed, <code>fix(dates): parse dd/mm for eu locales</code>. <a href="https://github.com/Brafit2001/support-kb-4471/issues/1" rel="nofollow">#1</a> closed as completed.</li> <li><strong><code>hint</code></strong>: won’t fix, the <code>booking-v3</code> form is retired. <a href="https://github.com/Brafit2001/support-kb-4471/issues/2" rel="nofollow">#2</a> closed as not planned.</li> <li><strong><code>shift</code></strong>: the desk files these reports under <code>parser</code> by tenant. <a href="https://github.com/Brafit2001/support-kb-4471/issues/3" rel="nofollow">#3</a> closed as a duplicate of #1. If one-day moves keep coming in after the parser fix, reopen it.</li></ul> <h2>How the reports were placed</h2> <ul><li><strong>Count each report once.</strong> The ticket export comes in overlapping pages, so some reports appear twice.
 Every count here is by unique report id.</li> <li><strong>Place by tenant, not by intake tag.</strong> The intake tag is guessed from the reporter’s browser. The cause
 depends on the tenant’s locale and booking form (<code>causes.ts</code>, <code>locales.ts</code>).</li> <li><strong>Read before merging.</strong> A matching subject says two people chose the same words, not that they hit the
 same bug. Reports with the same subject sit in all three rows.</li></ul> <h2>What #4471 shows today</h2> <p>For comparison, the table on the incident page, built from the same data:</p> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm">#4471</td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm">not this ticket — no ticket of its own</td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <h2>Lessons</h2> <ul><li>A count is only as good as the rule that merged it. Merge by cause, not by subject.</li> <li>When a table says “no ticket of its own”, open one.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-ZD4B-8WNP</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_1ja5nst = {
+					__sveltekit_nd5sqa = {
 						base: new URL("../../..", location).pathname.slice(0, -1),
-						version: "1794047344377"
+						version: "1794047522479"
 					};
 
 					const element = document.currentScript.parentElement;
 
 					import("../../../_app/immutable/entry/start.BPcehJr-.js").then(async (kit) => {
-						kit.init(__sveltekit_1ja5nst);
-						const app = await import("../../../_app/immutable/entry/app.-9EZr80W.js");
+						kit.init(__sveltekit_nd5sqa);
+						const app = await import("../../../_app/immutable/entry/app.DXa3twMq.js");
 						kit.start(app, element, {
 							node_ids: [0, 5],
 							data: [null,null],

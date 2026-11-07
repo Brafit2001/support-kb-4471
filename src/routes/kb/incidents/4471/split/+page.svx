@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · three problems, not one'
 owner: Marcelino Fernandez Cabello
-status: open
+status: closed
 reviewed: 2026-11-07
 signature: v1.eyJzdWIiOiIxOTA4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQwNDcxMDMsImV4cCI6MTc5NDEzMzUwM30.VsGEtZDjkiKOAAJKrgIjo5PrkAWP8N6ZZ7iiWsaf6jQ
 ---
@@ -37,6 +37,15 @@ Fixing the parser closes only the first row. The other two need their own fixes.
 - **`shift`**: the booking lands one day off, or on a different day for people in different time zones.
   The month never moves. The desk already read these as one-day moves (`desk-notes.json`), but the
   table filed them under `parser` by tenant. This looks like a time-zone conversion bug.
+
+## Outcome
+
+Engineering closed #4471 on 5 October:
+
+- **`parser`**: fixed, `fix(dates): parse dd/mm for eu locales`. [#1](https://github.com/Brafit2001/support-kb-4471/issues/1) closed as completed.
+- **`hint`**: won't fix, the `booking-v3` form is retired. [#2](https://github.com/Brafit2001/support-kb-4471/issues/2) closed as not planned.
+- **`shift`**: the desk files these reports under `parser` by tenant. [#3](https://github.com/Brafit2001/support-kb-4471/issues/3)
+  closed as a duplicate of #1. If one-day moves keep coming in after the parser fix, reopen it.
 
 ## How the reports were placed
 
